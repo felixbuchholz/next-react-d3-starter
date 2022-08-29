@@ -1,9 +1,8 @@
-import { FC, ReactElement } from 'react'
-
 import styles from '../../../styles/Layout.module.css'
+import { FCC } from '../../types/FCC'
 import { Head } from '../Head/Head'
 
-export const Layout: FC<{ children: ReactElement }> = ({ children }) => {
+export const Layout: FCC = ({ children }) => {
   return (
     <div className={styles.container}>
       <Head />

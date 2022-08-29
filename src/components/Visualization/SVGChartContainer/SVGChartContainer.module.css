@@ -1,0 +1,7 @@
+.container svg path {
+	fill: none;
+	stroke: #dc95ff;
+	stroke-width: 1;
+	filter: drop-shadow( 0px 0px 3px #f686d8);
+	transition: all 500ms ease-in-out;
+}
