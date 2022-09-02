@@ -1,38 +1,36 @@
 /* eslint-disable max-lines-per-function */
-import { curveBasis, line } from 'd3-shape'
-import React, { useState, FC } from 'react'
+import { curveCatmullRom, line } from 'd3-shape'
+import React, { FC, SVGAttributes } from 'react'
 
-import { DataPoint } from '../../../types/DataPoint'
-import { UseScalesReturn } from '../hooks/useScales'
+import { useInitial } from '../../../hooks/useInitial'
+import { UseScalesReturn } from '../../../types/hooks/useScales'
+import { DataPoint } from '../../../types/visualization/DataPoint'
 
-export const Trendline: FC<{ data: DataPoint[]; scales: UseScalesReturn }> = ({
-  data,
-  scales,
-}) => {
-  const [isInitial, setIsInitial] = useState(true)
+import styles from './Trendline.module.css'
 
-  setTimeout(() => {
-    setIsInitial(false)
-  }, delayInitial)
+export const Trendline: FC<
+  { data: DataPoint[]; scales: UseScalesReturn } & SVGAttributes<SVGPathElement>
+> = ({ data: dataOriginal, scales, className, ...pathAttributes }) => {
+  const { data, opacity } = useInitial(dataOriginal)
+  const offSet = scales.x.bandwidth() * half
+
+  // TODO: refactor to separate function
   const lineGenerator = line<[string, number]>()
-    .x(([x]) => scales.x(x) ?? noMatchCoordinate)
+    .x(([x]) => (scales.x(x) ?? noMatchCoordinate) + offSet)
     .y(([, y]) => scales.y(y))
-    .curve(curveBasis)
+    .curve(curveCatmullRom)
 
   const path = lineGenerator(data) ?? undefined
-  const initialPath =
-    lineGenerator(data.map(([x]) => [x, noDataYValue])) ?? undefined
 
   return (
     <path
-      d={isInitial ? initialPath : path}
-      opacity={isInitial ? opacityInitial : opacity}
+      {...pathAttributes}
+      d={path}
+      opacity={opacity}
+      className={`${styles.path} ${className}`}
+      data-testid="trendline"
     />
   )
 }
-
+const half = 0.5
 const noMatchCoordinate = 0
-const noDataYValue = 0
-const delayInitial = 500
-const opacityInitial = 0
-const opacity = 1

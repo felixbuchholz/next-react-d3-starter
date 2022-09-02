@@ -1,14 +1,14 @@
 import debounce from 'lodash.debounce'
 import { useEffect, useRef, useState, useMemo } from 'react'
 
-import { Dimensions } from '../../../types/Dimensions'
 import {
   OnResize,
   ResizeDimensions,
   UseDebouncedResize,
-} from '../../../types/hooks/useDebouncedResize'
-import { getElementFromRef } from '../../../utils/guards/getElementFromRef'
-import { getFirstArrayEntry } from '../../../utils/guards/getFirstArrayEntry'
+} from '../types/hooks/useDebouncedResize'
+import { Dimensions } from '../types/visualization/Dimensions'
+import { getElementFromRef } from '../utils/guards/getElementFromRef'
+import { getFirstArrayEntryOrBreak } from '../utils/guards/getFirstArrayEntryOrBreak'
 
 export const useDebouncedDimensions: UseDebouncedResize = (
   delay = defaultDelay
@@ -64,7 +64,10 @@ const getDimensionsFromResizeObserverEntry = (
 const getFirstResizeObserverEntryFrame = (
   resizeObserverEntries: ResizeObserverEntry[]
 ): Dimensions => {
-  const entry = getFirstArrayEntry(resizeObserverEntries)
+  const entry = getFirstArrayEntryOrBreak({
+    array: resizeObserverEntries,
+    errorMessage: 'Could not access first entry of resizeObserverEntries.',
+  })
   const frame = getDimensionsFromResizeObserverEntry(entry)
   return frame
 }

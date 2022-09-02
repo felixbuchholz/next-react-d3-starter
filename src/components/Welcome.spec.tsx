@@ -5,8 +5,8 @@ import React from 'react'
 import { Welcome } from './Welcome'
 
 describe('Welcome', () => {
-  it('should have a welcome message', () => {
+  it('should include the word /starter/', () => {
     render(<Welcome />)
-    expect(screen.getByText(/welcome/i)).toBeInTheDocument()
+    expect(screen.getByText(/starter/i)).toBeInTheDocument()
   })
 })

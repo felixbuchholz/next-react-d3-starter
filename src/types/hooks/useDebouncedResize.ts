@@ -1,6 +1,6 @@
 import { Dispatch, RefObject, SetStateAction } from 'react'
 
-import { Dimensions } from '../Dimensions'
+import { Dimensions } from '../visualization/Dimensions'
 
 export type OnResize = (props: ResizeObserverEntry[]) => void
 

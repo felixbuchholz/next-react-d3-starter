@@ -1,29 +1,31 @@
-import React, { RefObject, SVGProps } from 'react'
+import React, { HTMLAttributes, RefObject, SVGProps } from 'react'
 
-import { ChartDimensions } from '../../../types/Dimensions'
 import { FCC } from '../../../types/FCC'
 
 import styles from './SVGChartContainer.module.css'
 
-export const SVGChartContainer: FCC<{
-  className?: string
-  divRef: RefObject<HTMLDivElement>
-}> = ({ children, className, divRef }) => {
+export const SVGChartContainer: FCC<
+  {
+    divRef: RefObject<HTMLDivElement>
+  } & HTMLAttributes<HTMLDivElement>
+> = ({ children, className, divRef, ...divAttributes }) => {
   return (
-    <div className={`${styles.container} ${className}`} ref={divRef}>
-      <svg {...svgDefinition} width="100%" height="100%">
+    <div
+      {...divAttributes}
+      className={`${styles.container} ${className}`}
+      ref={divRef}
+      data-testid="divChartContainer"
+    >
+      <svg
+        {...svgDefinition}
+        width="100%"
+        height="100%"
+        style={{ display: 'block' }}
+        data-testid="svgChart"
+      >
         {children}
       </svg>
     </div>
-  )
-}
-
-export const GroupGraph: FCC<{ margins: ChartDimensions['margins'] }> = ({
-  children,
-  margins,
-}) => {
-  return (
-    <g transform={`translate(${margins.left}, ${margins.top})`}>{children}</g>
   )
 }
 
@@ -32,4 +34,5 @@ const svgDefinition: SVGProps<SVGSVGElement> = {
   xmlns: 'http://www.w3.org/2000/svg',
   xmlnsXlink: 'http://www.w3.org/1999/xlink',
   xmlSpace: 'preserve',
+  preserveAspectRatio: 'none',
 }

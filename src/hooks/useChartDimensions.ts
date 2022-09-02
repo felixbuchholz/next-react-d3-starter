@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { ChartDimensions, Dimensions, Margins } from '../../../types/Dimensions'
-import { UseChartDimensions } from '../../../types/hooks/useChartDimensions'
+import { UseChartDimensions } from '../types/hooks/useChartDimensions'
+import { ChartDimensions } from '../types/visualization/Dimensions'
+import { getUpdatedChartDimensions } from '../utils/visualization/getUpdatedChartDimensions'
+import { hasChangedFrameOrMargins } from '../utils/visualization/hasChangedFrameOrMargins'
 
 import {
   defaultDimensions,
@@ -42,36 +44,4 @@ const defaultChartDimensions: ChartDimensions = {
   frame: defaultDimensions,
   margins: defaultMargins,
   graph: defaultDimensions,
-}
-
-const getUpdatedChartDimensions = ({
-  prev,
-  frame,
-  margins,
-}: {
-  prev: ChartDimensions
-  frame: Dimensions
-  margins: Margins
-}): ChartDimensions => {
-  const _dimensions = { ...prev }
-  _dimensions.frame = frame
-  _dimensions.graph.height = frame.height - (margins.bottom + margins.top)
-  _dimensions.graph.width = frame.width - (margins.left + margins.right)
-  _dimensions.margins = margins
-  return _dimensions
-}
-
-const hasChangedFrameOrMargins = ({
-  chartDimensions,
-  frame,
-  margins,
-}: {
-  chartDimensions: ChartDimensions
-  frame: Dimensions
-  margins: Margins
-}): boolean => {
-  return (
-    !Object.is(frame, chartDimensions.frame) ||
-    !Object.is(margins, chartDimensions.margins)
-  )
 }

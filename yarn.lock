@@ -2667,6 +2667,11 @@ csstype@^3.0.2:
   dependencies:
     internmap "1 - 2"
 
+d3-axis-for-react@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/d3-axis-for-react/-/d3-axis-for-react-1.1.0.tgz#c6e8e0a91da0ba72f07307324879e9264ea9734a"
+  integrity sha512-PLReXjIYibedgL1Scp4oRfJ9g3RAL1W7Nnum2QQbbBCBAPoCgrXPbh2R6ZvhI2EaOMFBgRu381VeEUY+Appjww==
+
 "d3-color@1 - 3":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/d3-color/-/d3-color-3.1.0.tgz#395b2833dfac71507f12ac2f7af23bf819de24e2"

@@ -1,6 +1,6 @@
 import { RefObject } from 'react'
 
-import { ChartDimensions, Margins } from '../Dimensions'
+import { Margins, ChartDimensions } from '../visualization/Dimensions'
 
 type UseChartDimensionsProps = {
   margins?: Margins
