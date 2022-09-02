@@ -5,8 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint:fix": "yarn lint --fix",
     "lint": "next lint",
+    "lint:fix": "yarn lint --fix",
     "start": "next start",
     "type:check": "tsc --project tsconfig.json --pretty --noEmit",
     "test": "jest",
