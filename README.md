@@ -1,3 +1,5 @@
+![Example chart preview](./public/test-chart.png)
+
 # A Next.js + D3 Starter!
 
 *Integrates D3 and React following a React first approach:*
