@@ -5,4 +5,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///Users/felixbuchholz/home/do/next-react-d3-starter/.github/workflows/deploy.yml"
+  },
 }
